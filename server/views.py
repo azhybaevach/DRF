@@ -1,6 +1,4 @@
-from django.shortcuts import render
-from rest_framework.status import HTTP_200_OK
-from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import generics
 from .models import *
 from .serializers import StudentSerializer
@@ -10,6 +8,7 @@ from .serializers import StudentSerializer
 class StudentListView(generics.ListAPIView):
     queryset = Student.objects.all()
     serializer_class =  StudentSerializer
+    permission_classes = (IsAuthenticated,)
 
 
 class StudentCreateView(generics.CreateAPIView):
